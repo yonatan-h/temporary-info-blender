@@ -1,35 +1,38 @@
 "use strict";
-// This file contains custom validators that can be used in the backend
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isStrongPassword = void 0;
-/**
- *
- * @param {string} password
- * @returns true if password is strong enough. If not false.
- *
- * A function to check if a password is strong enough
- */
-function isStrongPassword(password) {
-    // criteria: Password must be at least 8 characters long
+exports.InvalidInputError = exports.checkPasswordStrength = void 0;
+// A function to check if a password is strong enough
+function checkPasswordStrength(password) {
+    const criteria = [
+        {
+            regex: /[A-Z]/,
+            message: 'Password must contain at least one uppercase letter',
+        },
+        {
+            regex: /[a-z]/,
+            message: 'Password must contain at least one lowercase letter',
+        },
+        { regex: /\d/, message: 'Password must contain at least one digit' },
+        {
+            regex: /[!@#$%^&*]/,
+            message: 'Password must contain at least one special character',
+        },
+    ];
+    for (const criterion of criteria) {
+        if (!criterion.regex.test(password)) {
+            throw new InvalidInputError(criterion.message);
+        }
+    }
     if (password.length < 8) {
-        return false;
+        throw new InvalidInputError('Password must be at least 8 characters long');
     }
-    // criteria: Password must contain at least one uppercase letter
-    if (!/[A-Z]/.test(password)) {
-        return false;
-    }
-    // criteria: Password must contain at least one lowercase letter
-    if (!/[a-z]/.test(password)) {
-        return false;
-    }
-    // criteria: Password must contain at least one digit
-    if (!/\d/.test(password)) {
-        return false;
-    }
-    // criteria: Password must contain at least one special character
-    if (!/[!@#$%^&*]/.test(password)) {
-        return false;
-    }
-    return true;
 }
-exports.isStrongPassword = isStrongPassword;
+exports.checkPasswordStrength = checkPasswordStrength;
+// Custom error for password not strong enough
+class InvalidInputError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'PasswordNotStrongEnoughError';
+    }
+}
+exports.InvalidInputError = InvalidInputError;

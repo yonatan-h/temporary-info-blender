@@ -16,8 +16,8 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = require("dotenv");
-const user_routes_js_1 = __importDefault(require("./routes/user.routes.js"));
-const news_routes_js_1 = __importDefault(require("./routes/news.routes.js"));
+const user_routes_1 = __importDefault(require("./routes/user.routes"));
+const dummy_news_routes_1 = __importDefault(require("./routes/dummy.news.routes"));
 (0, dotenv_1.config)();
 const app = (0, express_1.default)();
 // MIDDLEWARES, PARSERS TO USE JSON
@@ -30,8 +30,8 @@ app.use((req, res, next) => {
     next();
 });
 // ROUTES
-app.use("/api/v1/user", user_routes_js_1.default);
-app.use("/api/v1/news", news_routes_js_1.default);
+app.use("/api/v1/user", user_routes_1.default);
+app.use("/api/v1/news", dummy_news_routes_1.default);
 // any origin can access this server
 app.use((0, cors_1.default)({
     origin: "*",

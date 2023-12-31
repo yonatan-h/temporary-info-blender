@@ -22,16 +22,17 @@ class newsController {
     */
     static getCuratedEvents(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const user = res.locals.user;
-            const categories = user.interests;
-            const country = user.country;
             try {
+                const user = res.locals.user;
+                const categories = user.interests;
+                const country = user.country;
                 const events = yield (0, remote_functions_1.getEventFeed)({ categories, country });
                 res.status(200).json({ "message": "success", "events": events });
             }
             catch (error) {
-                res.status(500)
-                    .json({ "message": "Something wrong while preparing curated news for you." });
+                res.status(500).json({
+                    "message": "Something wrong while preparing curated news for you."
+                });
             }
         });
     }
@@ -46,12 +47,14 @@ class newsController {
             const topic = req.query.q;
             try {
                 const events = yield (0, remote_functions_1.searchForEvents)(topic);
-                res.status(200).
-                    json({ "message": "Successfull searched topic", "query": topic, "events": events });
+                res.status(200).json({
+                    "message": "Successfull searched topic", "query": topic, "events": events
+                });
             }
             catch (error) {
-                res.status(500)
-                    .json({ "message": "Some thing went wrong while searching for the topic." });
+                res.status(500).json({
+                    "message": "Some thing went wrong while searching for the topic."
+                });
             }
         });
     }
@@ -62,19 +65,36 @@ class newsController {
      */
     static getEventDetail(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const eventUri = req.query.eventUri;
             try {
+                const eventUri = req.query.eventUri;
                 const { event, articles } = yield (0, remote_functions_1.getDetails)(eventUri);
-                res.status(200)
-                    .json({
+                res.status(200).json({
                     "message": "Successfully got event detail",
                     "event": event,
                     "articles": articles
                 });
             }
             catch (error) {
-                res.status(500)
-                    .json({ "message": "Some thing went wrong while getting event detail." });
+                res.status(500).json({
+                    "message": "Some thing went wrong while getting event detail."
+                });
+            }
+        });
+    }
+    static getArticlesForEvent(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const eventUri = req.query.eventUri;
+                const articles = yield (0, remote_functions_1.getArticles)(eventUri);
+                res.status(200).json({
+                    "message": "Successfully got event detail",
+                    "articles": articles
+                });
+            }
+            catch (error) {
+                res.status(500).json({
+                    "message": "Some thing went wrong while getting event detail."
+                });
             }
         });
     }
@@ -85,15 +105,18 @@ class newsController {
      */
     static compareArticles(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
-            const { article1, article2 } = req.body;
             try {
+                const { article1, article2 } = req.body;
                 const comparison = yield (0, remote_functions_1.compareArticles)(article1, article2);
-                res.status(200).
-                    json({ "message": "Successfully compared articles.", "comparison": comparison });
+                res.status(200).json({
+                    "message": "Successfully compared articles.",
+                    "comparison": comparison
+                });
             }
             catch (error) {
-                res.status(500)
-                    .json({ "message": "Some thing went wrong while making article comparison." });
+                res.status(500).json({
+                    "message": "Some thing went wrong while making article comparison."
+                });
             }
         });
     }

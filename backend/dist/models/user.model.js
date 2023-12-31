@@ -4,12 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
-const constants_js_1 = require("../utils/constants.js");
+const constants_1 = require("../utils/constants");
 const userSchema = new mongoose_1.default.Schema({
     userName: {
         type: String,
         required: false,
-        default: "InfoBlend User",
+        default: "_User_",
     },
     password: {
         type: String,
@@ -21,7 +21,7 @@ const userSchema = new mongoose_1.default.Schema({
     },
     interests: {
         type: [String],
-        enum: constants_js_1.constants.eventCategories,
+        enum: constants_1.constants.eventCategories,
     },
     country: {
         type: String,

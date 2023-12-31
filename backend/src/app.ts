@@ -7,6 +7,7 @@ import { config as configDotenv } from "dotenv";
 
 import userRouter from "./routes/user.routes";
 import newsRouter from "./routes/news.routes";
+import dummyNewsRouter from "./routes/dummy.news.routes";
 
 configDotenv();
 
@@ -25,7 +26,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 // ROUTES
 app.use("/api/v1/user", userRouter);
-app.use("/api/v1/news", newsRouter);
+app.use("/api/v1/news", dummyNewsRouter);
 
 // any origin can access this server
 app.use(cors({

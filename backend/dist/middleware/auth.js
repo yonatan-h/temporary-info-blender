@@ -12,13 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserFromToken = void 0;
+exports.getUserFromToken = exports.getTokenFromRequest = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const mongoose_1 = require("mongoose");
-const user_model_js_1 = __importDefault(require("../models/user.model.js"));
+const user_model_1 = __importDefault(require("../models/user.model"));
 const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const existingUser = yield getUserFromToken(req);
+        const token = getTokenFromRequest(req);
+        if (!token)
+            return res.status(401).json({ message: "Unauthorized" });
+        const existingUser = yield getUserFromToken(token);
         if (!existingUser)
             return res.status(401).json({ message: "Unauthorized" });
         res.locals.user = existingUser;
@@ -28,12 +31,21 @@ const auth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () 
         return res.status(401).json({ message: "Unauthorized" });
     }
 });
-function getUserFromToken(req) {
-    return __awaiter(this, void 0, void 0, function* () {
+function getTokenFromRequest(req) {
+    try {
         const token = req.headers.authorization.split(" ")[1];
+        return token;
+    }
+    catch (error) {
+        return undefined;
+    }
+}
+exports.getTokenFromRequest = getTokenFromRequest;
+function getUserFromToken(token) {
+    return __awaiter(this, void 0, void 0, function* () {
         const { _id } = jsonwebtoken_1.default.verify(token, process.env.JWT_SECRET);
         const userId = new mongoose_1.Types.ObjectId(_id);
-        const existingUser = yield user_model_js_1.default.findById(userId);
+        const existingUser = yield user_model_1.default.findById(userId);
         return existingUser;
     });
 }

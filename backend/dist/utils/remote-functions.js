@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.compareArticles = exports.getDetails = exports.searchForEvents = exports.getEventFeed = void 0;
+exports.getArticles = exports.compareArticles = exports.getDetails = exports.searchForEvents = exports.getEventFeed = void 0;
 const eventregistry_1 = require("eventregistry");
 const dotenv_1 = require("dotenv");
 (0, dotenv_1.config)();
@@ -124,6 +124,7 @@ function getArticles(eventUri) {
         return articles;
     });
 }
+exports.getArticles = getArticles;
 function getDetails(eventUri) {
     return __awaiter(this, void 0, void 0, function* () {
         const [event, articles] = yield Promise.all([
