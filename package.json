@@ -5,7 +5,6 @@
   "description": "<img src=\"./images/infoblender-logo.png\" alt=\"Info_Blender logo\" title=\"Info_Blender\"/>",
   "main": "index.js",
   "scripts": {
-    "vercel-start": "cd backend && npm run dev && cd ../web && npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "run_web": "echo \"This should start both backend and web but it's not implemented yet\" ",
     "run_app": "echo \"This should start both backend and flutter mobile but it's not implemented yet\" "
