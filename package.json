@@ -1,5 +1,6 @@
 {
   "name": "info_blend",
+  "type": "module",
   "version": "1.0.0",
   "description": "<img src=\"./images/infoblender-logo.png\" alt=\"Info_Blender logo\" title=\"Info_Blender\"/>",
   "main": "index.js",
@@ -12,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.18.2",
     "javascript-time-ago": "^2.5.9"
   }
 }
