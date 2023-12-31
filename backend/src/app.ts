@@ -27,6 +27,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 // ROUTES
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/news", dummyNewsRouter);
+app.use("test", (req, res)=>res.send("test"));
 
 // any origin can access this server
 app.use(cors({
