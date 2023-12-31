@@ -1,1 +1,1 @@
-export default 'http://localhost:5000/api/v1'
+export default 'https://temporary-info-blender-backend.vercel.app/api/v1'
