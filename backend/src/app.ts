@@ -62,7 +62,7 @@ async function startListening() {
 async function startServer() {
     try {
         await connectToDb();
-        await startListening();
+        // await startListening();
         console.warn(`-- ✔ Server started successfully ✔ --`);
     } catch (error: any) {
         console.log(error.message);
