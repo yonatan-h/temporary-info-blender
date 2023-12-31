@@ -10,6 +10,19 @@ import Preferences from './pages/Preferences/Preferences'
 import LoggedInChecker from './components/LoggedInChecker'
 import ErrorPage from './pages/Error/Error'
 
+import { useEffect, useState } from 'react'
+function TokenApology() {
+  useEffect(() => {
+    if (sessionStorage.getItem('alertShown')) return
+    sessionStorage.setItem('alertShown', 'true')
+    alert(
+      'Warning!\nThis is not real data! We ran out of free API tokens for the moment. Will fix soon.'
+    )
+  }, [])
+
+  return null
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -41,6 +54,7 @@ const router = createBrowserRouter([
     path: '/feed',
     element: (
       <LoggedInChecker>
+        <TokenApology />
         <Feeds />,
       </LoggedInChecker>
     ),
@@ -56,9 +70,9 @@ const router = createBrowserRouter([
   {
     path: 'compare/event/:id',
     element: (
-      // <LoggedInChecker>
-      <Comparison />
-      // </LoggedInChecker>
+      <LoggedInChecker>
+        <Comparison />
+      </LoggedInChecker>
     ),
   },
   {
@@ -72,7 +86,7 @@ const router = createBrowserRouter([
 
   {
     path: '*',
-    element: <ErrorPage />
+    element: <ErrorPage />,
   },
 ])
 
