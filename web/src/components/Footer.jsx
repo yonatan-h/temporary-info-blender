@@ -13,11 +13,11 @@ export default function Footer () {
 
               <div className="col-6 flex flex-col gap-3">
                 <div className="mb-8 text-center font-bold text-xl"> ABOUT US </div>
-                <div className="text-center">a bunch of college students.</div>
+                <div className="text-center">Under construction</div>
               </div>
               <div className="col-6 flex flex-col gap-3">
                 <div className="mb-8 text-center font-bold text-xl"> CONTACT US </div>
-                <div className="text-center">Contact us with out contacts.</div>
+                <div className="text-center">Under construction</div>
               </div>
             </div>
             </div>
@@ -54,7 +54,7 @@ function CopyRight () {
           <div className="row justify-center">
             <div className="col-12 text-center">
               <div className="text-xs text-gray-400">
-                © 2021 - All Rights Reserved - Terms of Service
+                © 2023 - All Rights Reserved - Terms of Service
               </div>
             </div>
             </div>
